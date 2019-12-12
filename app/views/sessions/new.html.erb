@@ -2,6 +2,12 @@
   <h1>Login</h1>
 </header>
 
+<% if @failed %>
+  <div class="alert alert-danger" role="alert">
+    Incorrect login information. Please try again.
+  </div>
+<% end %>
+
 <%= form_tag '/login' do %>
 
   Email: <%= text_field_tag :email %>
