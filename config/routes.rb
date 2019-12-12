@@ -1,13 +1,20 @@
 Rails.application.routes.draw do
 
   root to: 'products#index'
-  # resources :about, only: [:show]
 
   get 'about', to: 'about#show'
 
+  # Register routes
+  get '/signup' => 'users#new'
+  post '/users' => 'users#create'
+
+  # Sessions routes
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy'
+
   resources :products, only: [:index, :show]
   resources :categories, only: [:show]
-  
 
   resource :cart, only: [:show] do
     post   :add_item
