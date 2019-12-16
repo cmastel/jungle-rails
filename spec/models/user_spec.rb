@@ -27,10 +27,36 @@ RSpec.describe User, type: :model do
         name: 'Test User',
         email: 'user@email.com',
         password: 'password',
-        password_confirmation: 'nil')
+        password_confirmation: nil)
       expect(@user).to_not be_valid
     end
 
+    it 'is not valid with confirmation does not match passworkd' do
+      @user = User.create(
+        name: 'Test User',
+        email: 'user@email.com',
+        password: 'password',
+        password_confirmation: '123456')
+      expect(@user).to_not be_valid
+    end
+
+    it 'is not valid without a name' do 
+      @user = User.create(
+        name: nil,
+        email: 'user@email.com',
+        password: 'password',
+        password_confirmation: 'password')
+      expect(@user).to_not be_valid
+    end
+
+    it 'is not valid without an email' do
+      @user = User.create(
+        name: 'Test User',
+        email: nil,
+        password: 'password',
+        password_confirmation: 'password')
+      expect(@user).to_not be_valid
+    end
 
   end
 end
