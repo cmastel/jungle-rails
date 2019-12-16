@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root to: 'products#index'
 
-  get 'about', to: 'about#show'
+  get '/about' => 'about#show'
 
   # Register routes
   get '/signup' => 'users#new'
