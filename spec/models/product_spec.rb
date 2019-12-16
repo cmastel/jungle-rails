@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
-  describe 'Validation' do
+  describe 'Product Validation' do
+    
     it 'is valid with valid attributes' do
       @category = Category.new(name: 'TestCategory')
       @category.save!
