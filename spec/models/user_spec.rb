@@ -58,6 +58,23 @@ RSpec.describe User, type: :model do
       expect(@user).to_not be_valid
     end
 
+    it 'is not valid if email already exists (case insensitive)' do
+      @user1 = User.new(
+        name: 'Test User',
+        email: 'user@email.COM'.downcase,
+        password: 'password',
+        password_confirmation: 'password')
+      @user1.save!
+
+      @user2 = User.create(
+        name: 'Test User',
+        email: 'USER@email.com'.downcase,
+        password: 'password',
+        password_confirmation: 'password')
+
+      expect(@user2).to_not be_valid
+    end
+
   end
 end
 
