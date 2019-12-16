@@ -75,6 +75,15 @@ RSpec.describe User, type: :model do
       expect(@user2).to_not be_valid
     end
 
+    it 'is not valid with a password less than 4 characters' do
+      @user = User.create(
+        name: 'Test User',
+        email: 'user@email.com',
+        password: 'pass',
+        password_confirmation: '123')
+      expect(@user).to_not be_valid
+    end
+
   end
 end
 
