@@ -12,7 +12,7 @@ class Admin::ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-
+    puts "product_params: #{product_params}"
     if @product.save
       redirect_to [:admin, :products], notice: 'Product created!'
     else
