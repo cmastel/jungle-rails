@@ -4,20 +4,31 @@ class SessionsController < ApplicationController
   end
 
   def create
-    puts "Test string"
-    puts @failed_login
+    # user = User.find_by_email(params[:email])
+    # # If the user exists AND the password entered is correct.
+    # if user && user.authenticate(params[:password])
+    #   # Save the user id inside the browser cookie. This is how we keep the user 
+    #   # logged in when they navigate around our website.
+    #   session[:user_id] = user.id
+    #   redirect_to '/'
+    # else
+    # # If user's login doesn't work, send them back to the login form.
+    #   @error = true
+    #   render '/sessions/new'
+    # end
+
     user = User.find_by_email(params[:email])
-    # If the user exists AND the password entered is correct.
-    if user && user.authenticate(params[:password])
-      # Save the user id inside the browser cookie. This is how we keep the user 
-      # logged in when they navigate around our website.
+    if user.authenticate_with_credentials(params[:email], params[:password])
       session[:user_id] = user.id
       redirect_to '/'
     else
-    # If user's login doesn't work, send them back to the login form.
       @error = true
       render '/sessions/new'
     end
+  
+
+
+
   end
 
   def destroy

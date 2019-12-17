@@ -61,14 +61,14 @@ RSpec.describe User, type: :model do
     it 'is not valid if email already exists (case insensitive)' do
       @user1 = User.new(
         name: 'Test User',
-        email: 'user@email.COM'.downcase,
+        email: 'user@email.COM',
         password: 'password',
         password_confirmation: 'password')
       @user1.save!
 
       @user2 = User.create(
         name: 'Test User',
-        email: 'USER@email.com'.downcase,
+        email: 'USER@email.com',
         password: 'password',
         password_confirmation: 'password')
 
@@ -85,6 +85,22 @@ RSpec.describe User, type: :model do
     end
 
   end
+
+  describe '.authenticate_with_credentials' do
+    it 'is valid with valid attributes' do
+      @user = User.new(
+        name: 'Test User',
+        email: 'user@email.com',
+        password: 'password',
+        password_confirmation: 'password')
+      @user.save!
+
+      login = @user.authenticate_with_credentials(@user.email, @user.password)
+      expect(login).to be_truthy
+    end
+  end
+
+
 end
 
 
