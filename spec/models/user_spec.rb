@@ -87,6 +87,7 @@ RSpec.describe User, type: :model do
   end
 
   describe '.authenticate_with_credentials' do
+    
     it 'is valid with valid attributes' do
       @user = User.new(
         name: 'Test User',
@@ -98,6 +99,67 @@ RSpec.describe User, type: :model do
       login = @user.authenticate_with_credentials(@user.email, @user.password)
       expect(login).to be_truthy
     end
+
+    it 'is not valid with an incorrect password' do 
+      @user = User.new(
+        name: 'Test User',
+        email: 'user@email.com',
+        password: 'password',
+        password_confirmation: 'password')
+      @user.save!
+
+      login = @user.authenticate_with_credentials(@user.email, 'wrongpassword')
+      expect(login).to_not be_truthy
+    end
+
+    it 'is not valid with a user that does not exist' do 
+      @user = User.new(
+        name: 'Test User',
+        email: 'user@email.com',
+        password: 'password',
+        password_confirmation: 'password')
+      @user.save!
+
+      login = @user.authenticate_with_credentials('wronguser@email.com', @user.password)
+      expect(login).to_not be_truthy
+    end
+
+    it 'is not valid with a user that does not exist' do 
+      @user = User.new(
+        name: 'Test User',
+        email: 'user@email.com',
+        password: 'password',
+        password_confirmation: 'password')
+      @user.save!
+
+      login = @user.authenticate_with_credentials('wronguser@email.com', @user.password)
+      expect(login).to_not be_truthy
+    end
+
+    it 'is valid with an email that has preceding spaces' do 
+      @user = User.new(
+        name: 'Test User',
+        email: 'user@email.com',
+        password: 'password',
+        password_confirmation: 'password')
+      @user.save!
+
+      login = @user.authenticate_with_credentials('   user@email.com', @user.password)
+      expect(login).to be_truthy
+    end
+
+    it 'is valid with an email that has non-matching case' do 
+      @user = User.new(
+        name: 'Test User',
+        email: 'user@email.COM',
+        password: 'password',
+        password_confirmation: 'password')
+      @user.save!
+
+      login = @user.authenticate_with_credentials('USER@email.com', @user.password)
+      expect(login).to be_truthy
+    end
+
   end
 
 
