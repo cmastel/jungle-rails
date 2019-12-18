@@ -55,21 +55,3 @@ RSpec.describe Product, type: :model do
 
   end
 end
-
-
-
-
-# it 'should be auto-assigned by AR for saved records' do
-#   @category = Category.new( {"name"=>"TestTest"} )
-#   @product = Product.new( {
-#     "name"=>"TestProduct", 
-#       "description"=>"Something....", 
-#       "category_id"=>"8", 
-#       "quantity"=>"5", 
-#       "price"=>"20"
-#   } )
-#   @product.save!
-  
-#   expect(@product.id).to be_present
-# end
-
