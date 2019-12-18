@@ -7,20 +7,24 @@
   </div>
 <% end %>
 
-<%= form_tag '/login' do %>
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-1">
+    <%= form_tag '/login' do %>
 
-<div class='form-group'>
-  <%= label_tag "Email" %><br>
-  <%= text_field_tag :email %>
+    <div class='form-group'>
+      <%= label_tag "Email" %><br>
+      <%= text_field_tag :email, "", class: 'form-control' %>
+    </div>
+
+    <div class='form-group'>
+      <%= label_tag "Password" %><br>
+      <%= password_field_tag :password, "", class: 'form-control' %>
+    </div>
+
+    <%= submit_tag "Submit", class: 'btn btn-primary'  %>
+
+    <% end %>
+  </div>
 </div>
-
-<div class='form-group'>
-  <%= label_tag "Password" %><br>
-  <%= password_field_tag :password %>
-</div>
-
-<%= submit_tag "Submit", class: 'btn btn-primary'  %>
-
-<% end %>
 
 
