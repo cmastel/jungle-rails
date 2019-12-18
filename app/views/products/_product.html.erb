@@ -10,8 +10,13 @@
   </p>
   <footer class="actions">
     <% if product.quantity != 0 %>
-      <%= button_to add_item_cart_path(product_id: product.id), class: 'btn btn-primary' , method: :post do %>
-        <%= fa_icon "shopping-cart", text: 'Add' %>
+      
+      <% if (cart[product.id.to_s] != product.quantity) %>
+        <%= button_to add_item_cart_path(product_id: product.id), class: 'btn btn-primary' , method: :post do %>
+          <%= fa_icon "shopping-cart", text: 'Add' %>
+        <% end %>
+      <% else %>
+        <%= 'Not Available' %>
       <% end %>
     <% end %>
     <%= link_to product, class: 'btn btn-default pull-right' do %>
@@ -25,7 +30,7 @@
 
   <% if product.quantity == 0 %>
     <aside class="soldout">
-      SOLD OUT! <%= product.quantity %>
+      SOLD OUT!
     </aside>
   <% end %>
 
