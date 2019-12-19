@@ -50,12 +50,38 @@ RSpec.describe Order, type: :model do
       @product1.reload
       @product2.reload
       # 5. use RSpec expect syntax to assert their new quantity values
-      expect(@product1.quantity).to eq(3)
-      expect(@product2.quantity).to eq(5)
+      expect(@product1.quantity).to eq(2)
+      expect(@product2.quantity).to eq(3)
     end
     # pending test 2
-    xit 'does not deduct quantity from products that are not in the order' do
+    it 'does not deduct quantity from products that are not in the order' do
       # TODO: Implement based on hints in previous test
+      @order = Order.new(
+        email: 'sample@emai.com',
+        total_cents: 50000,
+        stripe_charge_id: 'RTG45FRT%'
+      )
+
+      @order.line_items.new(
+        product: @product1,
+        quantity: 1,
+        item_price: @product1.price,
+        total_price: @product1.price * @product1.quantity
+      )
+      @order.line_items.new(
+        product: @product2,
+        quantity: 2,
+        item_price: @product2.price,
+        total_price: @product2.price * @product2.quantity
+      )
+
+      @order.save!
+      @product1.reload
+      @product2.reload
+      @product3.reload
+
+      expect(@product3.quantity).to eq(8)
+
     end
   end
 end
