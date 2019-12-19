@@ -41,13 +41,13 @@ This project was created and published by me as part of my learnings at Lighthou
   * The Order Details Page contains items, image, name, description, quantities and line item totals
   * The final amount of the Cart is displayed
   * The email that was used to place the order is shown
+  * Product inventory is updated on successful order placement
 * If a user visits the Cart page when there are no items in the cart, a message is displayed indicating so, with a link back to the home page
 * Limits are placed on the Products and Cart pages which limit the number of items added so that it does not exceed the quantity in inventory
 
 ## Future Additions
 
 * Email receipts upon a successful order (in progress)
-* Update product inventory upon a successful order
 * Add user ratings, and show the result on Products
 
 ## Setup
